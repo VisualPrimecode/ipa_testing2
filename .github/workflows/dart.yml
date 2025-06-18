@@ -14,8 +14,12 @@ jobs:
         with:
           channel: 'stable'
           architecture: x64
+
       - run: flutter pub get
-      
+
+      - run: |
+          echo "Modifying Podfile to require iOS 15.5"
+          sed -i '' 's/platform :ios, .*/platform :ios, '\''15.5'\''/' ios/Podfile || echo "platform :ios, '15.5'" >> ios/Podfile
 
       - run: pod repo update
         working-directory: ios
